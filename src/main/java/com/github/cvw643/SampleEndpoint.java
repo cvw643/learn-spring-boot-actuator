@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Endpoint(id = "sample")
 public class SampleEndpoint {
+    private final SampleService sampleService;
+
+    public SampleEndpoint(SampleService sampleService) {
+        this.sampleService = sampleService;
+    }
+
     @ReadOperation
     public String read() {
         return "Hello";
@@ -15,6 +21,6 @@ public class SampleEndpoint {
 
     @WriteOperation
     public String echo(String content) {
-        return content;
+        return sampleService.echo(content);
     }
 }
